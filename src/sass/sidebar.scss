@@ -1,0 +1,80 @@
+.multiStepForm__sidebar {
+  height: 180px;
+  background-image: url("../assets/bg-sidebar-mobile.svg");
+  background-size: cover;
+  background-position: center;
+
+  &-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px 16px;
+    height: 57%;
+
+    &-item {
+      display: flex;
+
+      &--active {
+        > span {
+          border-color: var(--sky-blue) !important;
+          color: var(--denim) !important;
+          background: var(--sky-blue);
+        }
+      }
+      > span {
+        height: 33px;
+        width: 33px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-weight: 700;
+        border: 1px solid #fff;
+        color: #fff;
+      }
+      div {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (min-width: $md) {
+  .multiStepForm__sidebar {
+    background-image: url("../assets/bg-sidebar-desktop.svg");
+    height: initial;
+    flex-basis: 274px;
+    min-width: 274px;
+
+    &-steps {
+      padding: 35px;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      height: auto;
+      &-item {
+        gap: 16px;
+        align-items: center;
+        div {
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+
+          span {
+            &:first-child {
+              color: var(--light-blue);
+              font-size: 12px;
+            }
+
+            &:last-child {
+              font-weight: 700;
+              font-size: 14px;
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+}

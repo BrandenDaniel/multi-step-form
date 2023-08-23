@@ -1,0 +1,149 @@
+.multiStepForm {
+  display: flex;
+  flex-direction: column;
+
+  &__form {
+    padding: 0 16px;
+    margin-top: -77.4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px 0;
+    height: calc(100vh - 102.59px);
+
+    > div:first-child {
+      box-shadow: 0px 25px 40px -20px rgba(0, 0, 0, 0.1);
+      max-width: 375px;
+      margin: 0 auto;
+    }
+
+    &-container {
+      padding: 32px 24px;
+      background: #fff;
+      border-radius: 10px;
+
+      > h1 {
+        color: var(--denim);
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 9px;
+      }
+
+      > p {
+        line-height: 1.56;
+        color: var(--grey);
+      }
+    }
+
+    &-info {
+      &-input {
+        margin-top: 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        > div {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+
+          label {
+            font-size: 12px;
+            color: var(--denim);
+          }
+
+          input {
+            height: 40px;
+            padding: 0 14px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            color: var(--denim);
+            font-weight: 500;
+
+            &::placeholder {
+              color: var(--grey);
+            }
+          }
+        }
+      }
+    }
+
+    &-submit {
+      padding: 16px;
+      background: #fff;
+      margin: 0 -16px;
+      display: flex;
+      justify-content: space-between;
+
+      &-back {
+        font-size: 14px;
+        color: var(--grey);
+        background: none;
+        border: none;
+        font-weight: 500;
+        padding: 0;
+      }
+
+      &-next {
+        color: #fff;
+        background: var(--denim);
+        border: none;
+        border-radius: 4px;
+        padding: 12px 16px;
+      }
+    }
+  }
+}
+
+@media (min-width: $md) {
+  .multiStepForm {
+    height: 600px;
+    max-width: 940px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 16px;
+    flex-direction: row;
+    gap: 16px;
+    border-radius: 15px;
+    background: #fff;
+
+    &__form {
+      padding: 0;
+      margin: 8px 0 0 0;
+      flex-grow: 1;
+      height: initial;
+
+      &-container {
+        > h1 {
+          font-size: 32px;
+        }
+      }
+
+      > div {
+        width: 100%;
+        margin: 0 auto;
+        box-shadow: none !important;
+        padding: 32px 0;
+      }
+
+      &-submit {
+        padding: 16px 0 !important;
+        max-width: 375px;
+        &-next {
+          padding: 16px 25px;
+          border-radius: 8px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $lg) {
+  .multiStepForm {
+    &__form {
+      > div {
+        max-width: 450px !important;
+      }
+    }
+  }
+}
