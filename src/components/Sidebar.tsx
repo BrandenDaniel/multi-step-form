@@ -1,11 +1,15 @@
 import React from "react";
 
-const Sidebar = ({ currentActiveStep }) => {
-  type Step = {
-    step: number;
-    title: string;
-  };
+type Step = {
+  step: number;
+  title: string;
+};
 
+type Props = {
+  currentActiveStep: number;
+};
+
+const Sidebar = ({ currentActiveStep }: Props) => {
   const content: Array<Step> = [
     { step: 1, title: "YOUR INFO" },
     { step: 2, title: "SELECT PLAN" },

@@ -3,7 +3,12 @@ import ArcadeIcon from "../../assets/icon-arcade.svg";
 import AdvancedIcon from "../../assets/icon-advanced.svg";
 import ProIcon from "../../assets/icon-pro.svg";
 
-const StepTwo_plan = ({ currentActiveStep }) => {
+type Props = {
+  currentActiveStep: number;
+  setCurrentActiveStep: any;
+};
+
+const StepTwo_plan = ({ currentActiveStep, setCurrentActiveStep }: Props) => {
   return currentActiveStep == 2 ? (
     <div className="multiStepForm__form-plan multiStepForm__form-container">
       <h1>Select your plan</h1>

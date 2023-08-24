@@ -1,6 +1,11 @@
 import React from "react";
 
-const StepOne_info = ({ currentActiveStep, setCurrentActiveStep }) => {
+type Props = {
+  currentActiveStep: number;
+  setCurrentActiveStep: any;
+};
+
+const StepOne_info = ({ currentActiveStep, setCurrentActiveStep }: Props) => {
   return currentActiveStep == 1 ? (
     <div className="multiStepForm__form-info multiStepForm__form-container">
       <h1>Personal info</h1>

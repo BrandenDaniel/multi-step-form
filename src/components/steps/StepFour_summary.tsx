@@ -1,6 +1,14 @@
 import React from "react";
 
-const StepFour_summary = ({ currentActiveStep }) => {
+type Props = {
+  currentActiveStep: number;
+  setCurrentActiveStep: any;
+};
+
+const StepFour_summary = ({
+  currentActiveStep,
+  setCurrentActiveStep,
+}: Props) => {
   return currentActiveStep == 4 ? (
     <div className="multiStepForm__form-summary multiStepForm__form-container">
       <h1>Finishing up</h1>

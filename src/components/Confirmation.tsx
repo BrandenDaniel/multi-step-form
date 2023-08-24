@@ -1,7 +1,11 @@
 import Image from "next/image";
 import ThankYouIcon from "../assets/icon-thank-you.svg";
 
-const Confirmation = ({ currentActiveStep }) => {
+type Props = {
+  currentActiveStep: number;
+};
+
+const Confirmation = ({ currentActiveStep }: Props) => {
   return currentActiveStep == 5 ? (
     <div className="multiStepForm__form-confirmation multiStepForm__form-container">
       <Image src={ThankYouIcon} alt="thank you" />

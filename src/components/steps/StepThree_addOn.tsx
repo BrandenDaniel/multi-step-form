@@ -1,6 +1,14 @@
 import React from "react";
 
-const StepThree_addOn = ({ currentActiveStep }) => {
+type Props = {
+  currentActiveStep: number;
+  setCurrentActiveStep: any;
+};
+
+const StepThree_addOn = ({
+  currentActiveStep,
+  setCurrentActiveStep,
+}: Props) => {
   return currentActiveStep == 3 ? (
     <div className="multiStepForm__form-addOn multiStepForm__form-container">
       <h1>Pick add-ons</h1>
