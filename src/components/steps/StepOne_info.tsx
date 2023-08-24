@@ -1,7 +1,7 @@
 import React from "react";
 
-const StepOne_info = () => {
-  return (
+const StepOne_info = ({ currentActiveStep, setCurrentActiveStep }) => {
+  return currentActiveStep == 1 ? (
     <div className="multiStepForm__form-info multiStepForm__form-container">
       <h1>Personal info</h1>
       <p>Please provide your name, email address, and phone number.</p>
@@ -25,6 +25,8 @@ const StepOne_info = () => {
         </div>
       </div>
     </div>
+  ) : (
+    ""
   );
 };
 

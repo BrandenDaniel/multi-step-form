@@ -1,6 +1,6 @@
 import React from "react";
 
-const Sidebar = () => {
+const Sidebar = ({ currentActiveStep }) => {
   type Step = {
     step: number;
     title: string;
@@ -17,7 +17,14 @@ const Sidebar = () => {
     <div className="multiStepForm__sidebar">
       <div className="multiStepForm__sidebar-steps">
         {content.map((item) => (
-          <div className="multiStepForm__sidebar-steps-item">
+          <div
+            className={`multiStepForm__sidebar-steps-item ${
+              currentActiveStep == item.step
+                ? "multiStepForm__sidebar-steps-item--active"
+                : ""
+            }`}
+            key={item.step}
+          >
             <span>{item.step}</span>
             <div>
               <span>Step {item.step}</span>

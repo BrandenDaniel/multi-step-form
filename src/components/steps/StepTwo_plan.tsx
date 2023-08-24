@@ -1,10 +1,10 @@
 import Image from "next/image";
-import ArcadeIcon from "../assets/icon-arcade.svg";
-import AdvancedIcon from "../assets/icon-advanced.svg";
-import ProIcon from "../assets/icon-pro.svg";
+import ArcadeIcon from "../../assets/icon-arcade.svg";
+import AdvancedIcon from "../../assets/icon-advanced.svg";
+import ProIcon from "../../assets/icon-pro.svg";
 
-const StepTwo_plan = () => {
-  return (
+const StepTwo_plan = ({ currentActiveStep }) => {
+  return currentActiveStep == 2 ? (
     <div className="multiStepForm__form-plan multiStepForm__form-container">
       <h1>Select your plan</h1>
       <p>You have the option of monthly or yearly billing.</p>
@@ -44,6 +44,8 @@ const StepTwo_plan = () => {
         <span>Yearly</span>
       </div>
     </div>
+  ) : (
+    ""
   );
 };
 
