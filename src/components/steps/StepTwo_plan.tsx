@@ -5,7 +5,7 @@ import ProIcon from "../../assets/icon-pro.svg";
 
 type Props = {
   currentActiveStep: number;
-  setCurrentActiveStep: any;
+  setCurrentActiveStep?: any;
 };
 
 const StepTwo_plan = ({ currentActiveStep, setCurrentActiveStep }: Props) => {

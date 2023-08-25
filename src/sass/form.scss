@@ -5,8 +5,6 @@
   &:has(.multiStepForm__form-confirmation) {
     .multiStepForm {
       &__form {
-        margin: 0;
-
         &-submit {
           display: none;
         }
@@ -54,14 +52,32 @@
         flex-direction: column;
         gap: 16px;
 
+        &-validation-msg {
+          color: var(--red-error);
+          font-weight: 700;
+          display: none;
+        }
+
         > div {
           display: flex;
           flex-direction: column;
           gap: 5px;
 
+          &:has(input:invalid[focused="true"]) {
+            input {
+              border-color: var(--red-error);
+            }
+            .multiStepForm__form-info-input-validation-msg {
+              display: block !important;
+            }
+          }
+
           label {
             font-size: 12px;
             color: var(--denim);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
           }
 
           input {
@@ -78,6 +94,26 @@
 
             &:focus {
               outline-color: var(--purple);
+            }
+
+            &:invalid {
+              // border-color: var(--red-error);
+            }
+
+            // &:valid,
+            // &:placeholder-shown {
+            //   border-color: #d6d9e6 !important;
+            // }
+
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
+
+            /* Firefox */
+            &[type="number"] {
+              -moz-appearance: textfield;
             }
           }
         }
@@ -422,6 +458,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
+          margin: 0;
         }
       }
     }
@@ -448,6 +485,10 @@
       &-info {
         &-input {
           margin-top: 35px;
+
+          input {
+            border-radius: 8px !important;
+          }
         }
       }
 

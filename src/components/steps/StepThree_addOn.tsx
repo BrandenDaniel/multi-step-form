@@ -2,7 +2,7 @@ import React from "react";
 
 type Props = {
   currentActiveStep: number;
-  setCurrentActiveStep: any;
+  setCurrentActiveStep?: any;
 };
 
 const StepThree_addOn = ({

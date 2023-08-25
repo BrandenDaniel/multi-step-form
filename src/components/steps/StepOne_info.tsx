@@ -1,35 +1,120 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
+import StepSubmit from "../StepSubmit";
 
 type Props = {
   currentActiveStep: number;
   setCurrentActiveStep: any;
+  validation: any;
+  setValidation: any;
 };
 
-const StepOne_info = ({ currentActiveStep, setCurrentActiveStep }: Props) => {
-  return currentActiveStep == 1 ? (
-    <div className="multiStepForm__form-info multiStepForm__form-container">
-      <h1>Personal info</h1>
-      <p>Please provide your name, email address, and phone number.</p>
+const StepOne_info = ({
+  currentActiveStep,
+  setCurrentActiveStep,
+  validation,
+  setValidation,
+}: Props) => {
+  const [inputs, setInputs] = useState([
+    {
+      name: "name",
+      type: "text",
+      placeholder: "e.g. Stephen King",
+      id: "name",
+      label: "Name",
+      required: true,
+      focused: "false",
+      value: "",
+      valid: false,
+    },
+    {
+      name: "email",
+      type: "email",
+      placeholder: "e.g. stephenking@lorem.com",
+      id: "email",
+      label: "Email Address",
+      errorMessage: "Email address must be valid",
+      required: true,
+      focused: "false",
+      value: "",
+      valid: false,
+    },
+    {
+      name: "phone",
+      type: "number",
+      placeholder: "e.g. 04 32 323 232",
+      id: "phone",
+      label: "Phone Number",
+      required: true,
+      focused: "false",
+      value: "",
+      valid: false,
+    },
+  ]);
 
-      <div className="multiStepForm__form-info-input">
-        <div>
-          <label htmlFor="name">Name</label>
-          <input type="text" placeholder="e.g. Stephen King" id="name" />
-        </div>
-        <div>
-          <label htmlFor="email">Email Address</label>
-          <input
-            type="email"
-            placeholder="e.g. stephenking@lorem.com"
-            id="email"
-          />
-        </div>
-        <div>
-          <label htmlFor="number">Phone Number</label>
-          <input type="tel" placeholder="e.g. 04 32 323 232" id="number" />
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newInputValue = inputs.map((input) => {
+      if (input.name === e.target.name) {
+        return {
+          ...input,
+          value: e.target.value,
+          valid: e.target.checkValidity(),
+        };
+      }
+      return input;
+    });
+
+    setInputs(newInputValue);
+  };
+
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    const newInputs = inputs.map((input) => {
+      if (input.name === e.target.name) {
+        return { ...input, focused: "true" };
+      }
+      return input;
+    });
+    setInputs(newInputs);
+  };
+
+  const stepOneValidation = () => {
+    inputs.map((input) => {});
+  };
+
+  return currentActiveStep == 1 ? (
+    <>
+      <div className="multiStepForm__form-info multiStepForm__form-container">
+        <h1>Personal info</h1>
+        <div className="multiStepForm__form-info-input">
+          {inputs.map((input) => (
+            <div key={input.id}>
+              <label htmlFor={input.id}>
+                {input.label}
+                <span className="multiStepForm__form-info-input-validation-msg">
+                  {input?.errorMessage
+                    ? input.errorMessage
+                    : "This field is required"}
+                </span>
+              </label>
+              <input
+                {...input}
+                value={input.value}
+                onChange={handleChange}
+                onBlur={handleFocus}
+                focused={input.focused}
+              />
+            </div>
+          ))}
         </div>
       </div>
-    </div>
+      <StepSubmit
+        currentActiveStep={currentActiveStep}
+        setCurrentActiveStep={setCurrentActiveStep}
+        validation={validation.stepOne}
+        stepOneValidation={stepOneValidation}
+      />
+    </>
   ) : (
     ""
   );
