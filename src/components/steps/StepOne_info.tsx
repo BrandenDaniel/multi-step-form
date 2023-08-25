@@ -26,7 +26,6 @@ const StepOne_info = ({
       required: true,
       focused: "false",
       value: "",
-      valid: false,
     },
     {
       name: "email",
@@ -38,7 +37,6 @@ const StepOne_info = ({
       required: true,
       focused: "false",
       value: "",
-      valid: false,
     },
     {
       name: "phone",
@@ -49,7 +47,6 @@ const StepOne_info = ({
       required: true,
       focused: "false",
       value: "",
-      valid: false,
     },
   ]);
 
@@ -63,6 +60,13 @@ const StepOne_info = ({
         };
       }
       return input;
+    });
+
+    inputs.map((input) => {
+      if (e.target.checkValidity()) {
+        setValidation({ ...validation, stepOne: true });
+      } else {
+      }
     });
 
     setInputs(newInputValue);
@@ -79,7 +83,11 @@ const StepOne_info = ({
   };
 
   const stepOneValidation = () => {
-    inputs.map((input) => {});
+    setInputs(
+      inputs.map((input) => {
+        return { ...input, focused: "true" };
+      })
+    );
   };
 
   return currentActiveStep == 1 ? (
