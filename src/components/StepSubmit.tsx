@@ -2,20 +2,20 @@ import React, { MouseEvent } from "react";
 
 type Props = {
   currentActiveStep: number;
-  setCurrentActiveStep: any;
-  validation: any;
-  stepOneValidation: any;
+  setCurrentActiveStep?: any;
+  validation?: any;
+  stepValidation?: any;
 };
 
 const StepSubmit = ({
   currentActiveStep,
   setCurrentActiveStep,
   validation,
-  stepOneValidation,
+  stepValidation,
 }: Props) => {
   const goNext = (e: React.MouseEvent) => {
     e.preventDefault();
-    stepOneValidation();
+    stepValidation && stepValidation();
     validation ? setCurrentActiveStep(currentActiveStep + 1) : "";
   };
 

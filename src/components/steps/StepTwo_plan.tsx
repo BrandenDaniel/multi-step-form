@@ -1,54 +1,110 @@
+import React, { MouseEvent, ChangeEvent } from "react";
 import Image from "next/image";
 import ArcadeIcon from "../../assets/icon-arcade.svg";
 import AdvancedIcon from "../../assets/icon-advanced.svg";
 import ProIcon from "../../assets/icon-pro.svg";
+import StepSubmit from "../StepSubmit";
 
 type Props = {
   currentActiveStep: number;
-  setCurrentActiveStep?: any;
+  setCurrentActiveStep: any;
+  validation: any;
+  setValidation: any;
+  plan: string;
+  setPlan: any;
+  planType: string;
+  setPlanType: any;
 };
 
-const StepTwo_plan = ({ currentActiveStep, setCurrentActiveStep }: Props) => {
-  return currentActiveStep == 2 ? (
-    <div className="multiStepForm__form-plan multiStepForm__form-container">
-      <h1>Select your plan</h1>
-      <p>You have the option of monthly or yearly billing.</p>
+const StepTwo_plan = (props: Props) => {
+  const content = [
+    {
+      image: ArcadeIcon,
+      title: "Arcade",
+      price: "$9/mo",
+      bonus: "2 months free",
+    },
+    {
+      image: AdvancedIcon,
+      title: "Advanced",
+      price: "$12/mo",
+      bonus: "2 months free",
+    },
+    { image: ProIcon, title: "Pro", price: "$15/mo", bonus: "2 months free" },
+  ];
 
-      <div className="multiStepForm__form-plan-options">
-        <button className="multiStepForm__form-plan-options-active">
-          <Image src={ArcadeIcon} alt="Arcade" />
-          <div>
-            <h2>Arcade</h2>
-            <p>$9/mo</p>
-            <span>2 months free</span>
-          </div>
-        </button>
+  const handlePlanSelect = (
+    e: MouseEvent<HTMLButtonElement>,
+    title: string
+  ) => {
+    e.preventDefault();
 
-        <button>
-          <Image src={AdvancedIcon} alt="Advanced" />
-          <div>
-            <h2>Advanced</h2>
-            <p>$12/mo</p>
-            <span>2 months free</span>
-          </div>
-        </button>
+    props.setPlan(title);
+  };
 
-        <button>
-          <Image src={ProIcon} alt="Pro" />
-          <div>
-            <h2>Pro</h2>
-            <p>$15/mo</p>
-            <span>2 months free</span>
-          </div>
-        </button>
+  const handlePlanTypeChange = (event: ChangeEvent<HTMLInputElement>) => {
+    event.target.checked
+      ? props.setPlanType("year")
+      : props.setPlanType("month");
+  };
+
+  return props.currentActiveStep == 2 ? (
+    <>
+      <div className="multiStepForm__form-plan multiStepForm__form-container">
+        <h1>Select your plan</h1>
+        <p>You have the option of monthly or yearly billing.</p>
+
+        <div className="multiStepForm__form-plan-options">
+          {content.map((item) => (
+            <button
+              key={item.title}
+              className={
+                item.title == props.plan
+                  ? "multiStepForm__form-plan-options-active"
+                  : ""
+              }
+              onClick={(e) => handlePlanSelect(e, item.title)}
+            >
+              <Image src={item.image} alt={item.title} />
+              <div>
+                <h2>{item.title}</h2>
+                <p>{item.price}</p>
+                <span className={props.planType == "year" ? "show-bonus" : ""}>
+                  {item.bonus}
+                </span>
+              </div>
+            </button>
+          ))}
+        </div>
+
+        <div className="multiStepForm__form-plan-billing">
+          <span
+            className={
+              props.planType == "month"
+                ? "multiStepForm__form-plan-billing-active"
+                : ""
+            }
+          >
+            Monthly
+          </span>
+          <input type="checkbox" onChange={handlePlanTypeChange} />
+          <span
+            className={
+              props.planType == "year"
+                ? "multiStepForm__form-plan-billing-active"
+                : ""
+            }
+          >
+            Yearly
+          </span>
+        </div>
       </div>
-
-      <div className="multiStepForm__form-plan-billing">
-        <span className="multiStepForm__form-plan-billing-active">Monthly</span>
-        <input type="checkbox" />
-        <span>Yearly</span>
-      </div>
-    </div>
+      <StepSubmit
+        currentActiveStep={props.currentActiveStep}
+        setCurrentActiveStep={props.setCurrentActiveStep}
+        validation={props.validation.stepTwo}
+      />
+    </>
   ) : (
     ""
   );

@@ -26,6 +26,7 @@ const StepOne_info = ({
       required: true,
       focused: "false",
       value: "",
+      valid: false,
     },
     {
       name: "email",
@@ -37,6 +38,7 @@ const StepOne_info = ({
       required: true,
       focused: "false",
       value: "",
+      valid: false,
     },
     {
       name: "phone",
@@ -47,6 +49,7 @@ const StepOne_info = ({
       required: true,
       focused: "false",
       value: "",
+      valid: false,
     },
   ]);
 
@@ -62,14 +65,11 @@ const StepOne_info = ({
       return input;
     });
 
-    inputs.map((input) => {
-      if (e.target.checkValidity()) {
-        setValidation({ ...validation, stepOne: true });
-      } else {
-      }
-    });
-
     setInputs(newInputValue);
+
+    if (inputs[0].valid && inputs[1].valid && inputs[2].valid) {
+      setValidation({ ...validation, stepOne: true });
+    }
   };
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -110,7 +110,7 @@ const StepOne_info = ({
                 value={input.value}
                 onChange={handleChange}
                 onBlur={handleFocus}
-                focused={input.focused}
+                data-focused={input.focused}
               />
             </div>
           ))}
@@ -120,7 +120,7 @@ const StepOne_info = ({
         currentActiveStep={currentActiveStep}
         setCurrentActiveStep={setCurrentActiveStep}
         validation={validation.stepOne}
-        stepOneValidation={stepOneValidation}
+        stepValidation={stepOneValidation}
       />
     </>
   ) : (

@@ -12,10 +12,13 @@ const Page = () => {
   const [currentActiveStep, setCurrentActiveStep] = useState(1);
   const [validation, setValidation] = useState({
     stepOne: false,
-    stepTwo: false,
+    stepTwo: true,
     stepThree: false,
     stepFour: false,
   });
+
+  const [plan, setPlan] = useState("Arcade");
+  const [planType, setPlanType] = useState("month");
 
   return (
     <div className="multiStepForm">
@@ -27,7 +30,16 @@ const Page = () => {
           validation={validation}
           setValidation={setValidation}
         />
-        <StepTwo_plan currentActiveStep={currentActiveStep} />
+        <StepTwo_plan
+          currentActiveStep={currentActiveStep}
+          setCurrentActiveStep={setCurrentActiveStep}
+          validation={validation}
+          setValidation={setValidation}
+          plan={plan}
+          setPlan={setPlan}
+          planType={planType}
+          setPlanType={setPlanType}
+        />
         <StepThree_addOn currentActiveStep={currentActiveStep} />
         <StepFour_summary currentActiveStep={currentActiveStep} />
         <Confirmation currentActiveStep={currentActiveStep} />
