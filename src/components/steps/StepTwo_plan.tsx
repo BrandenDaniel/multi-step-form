@@ -9,7 +9,6 @@ type Props = {
   currentActiveStep: number;
   setCurrentActiveStep: any;
   validation: any;
-  setValidation: any;
   plan: string;
   setPlan: any;
   planType: string;
@@ -21,16 +20,27 @@ const StepTwo_plan = (props: Props) => {
     {
       image: ArcadeIcon,
       title: "Arcade",
-      price: "$9/mo",
+      price: `${props.planType == "month" ? 9 : 9 * 10}/${
+        props.planType == "month" ? "mo" : "yr"
+      }`,
       bonus: "2 months free",
     },
     {
       image: AdvancedIcon,
       title: "Advanced",
-      price: "$12/mo",
+      price: `${props.planType == "month" ? 12 : 12 * 10}/${
+        props.planType == "month" ? "mo" : "yr"
+      }`,
       bonus: "2 months free",
     },
-    { image: ProIcon, title: "Pro", price: "$15/mo", bonus: "2 months free" },
+    {
+      image: ProIcon,
+      title: "Pro",
+      price: `${props.planType == "month" ? 15 : 15 * 10}/${
+        props.planType == "month" ? "mo" : "yr"
+      }`,
+      bonus: "2 months free",
+    },
   ];
 
   const handlePlanSelect = (
@@ -48,65 +58,67 @@ const StepTwo_plan = (props: Props) => {
       : props.setPlanType("month");
   };
 
-  return props.currentActiveStep == 2 ? (
-    <>
-      <div className="multiStepForm__form-plan multiStepForm__form-container">
-        <h1>Select your plan</h1>
-        <p>You have the option of monthly or yearly billing.</p>
+  return (
+    props.currentActiveStep == 2 && (
+      <>
+        <div className="multiStepForm__form-plan multiStepForm__form-container">
+          <h1>Select your plan</h1>
+          <p>You have the option of monthly or yearly billing.</p>
 
-        <div className="multiStepForm__form-plan-options">
-          {content.map((item) => (
-            <button
-              key={item.title}
+          <div className="multiStepForm__form-plan-options">
+            {content.map((item) => (
+              <button
+                key={item.title}
+                className={
+                  item.title == props.plan
+                    ? "multiStepForm__form-plan-options-active"
+                    : ""
+                }
+                onClick={(e) => handlePlanSelect(e, item.title)}
+              >
+                <Image src={item.image} alt={item.title} />
+                <div>
+                  <h2>{item.title}</h2>
+                  <p>{item.price}</p>
+                  <span
+                    className={props.planType == "year" ? "show-bonus" : ""}
+                  >
+                    {item.bonus}
+                  </span>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          <div className="multiStepForm__form-plan-billing">
+            <span
               className={
-                item.title == props.plan
-                  ? "multiStepForm__form-plan-options-active"
+                props.planType == "month"
+                  ? "multiStepForm__form-plan-billing-active"
                   : ""
               }
-              onClick={(e) => handlePlanSelect(e, item.title)}
             >
-              <Image src={item.image} alt={item.title} />
-              <div>
-                <h2>{item.title}</h2>
-                <p>{item.price}</p>
-                <span className={props.planType == "year" ? "show-bonus" : ""}>
-                  {item.bonus}
-                </span>
-              </div>
-            </button>
-          ))}
+              Monthly
+            </span>
+            <input type="checkbox" onChange={handlePlanTypeChange} />
+            <span
+              className={
+                props.planType == "year"
+                  ? "multiStepForm__form-plan-billing-active"
+                  : ""
+              }
+            >
+              Yearly
+            </span>
+          </div>
         </div>
-
-        <div className="multiStepForm__form-plan-billing">
-          <span
-            className={
-              props.planType == "month"
-                ? "multiStepForm__form-plan-billing-active"
-                : ""
-            }
-          >
-            Monthly
-          </span>
-          <input type="checkbox" onChange={handlePlanTypeChange} />
-          <span
-            className={
-              props.planType == "year"
-                ? "multiStepForm__form-plan-billing-active"
-                : ""
-            }
-          >
-            Yearly
-          </span>
-        </div>
-      </div>
-      <StepSubmit
-        currentActiveStep={props.currentActiveStep}
-        setCurrentActiveStep={props.setCurrentActiveStep}
-        validation={props.validation.stepTwo}
-      />
-    </>
-  ) : (
-    ""
+        <StepSubmit
+          currentActiveStep={props.currentActiveStep}
+          setCurrentActiveStep={props.setCurrentActiveStep}
+          validation={props.validation.stepTwo}
+        />
+      </>
+    )
   );
 };
 

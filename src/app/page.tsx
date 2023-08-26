@@ -13,7 +13,7 @@ const Page = () => {
   const [validation, setValidation] = useState({
     stepOne: false,
     stepTwo: true,
-    stepThree: false,
+    stepThree: true,
     stepFour: false,
   });
 
@@ -34,14 +34,21 @@ const Page = () => {
           currentActiveStep={currentActiveStep}
           setCurrentActiveStep={setCurrentActiveStep}
           validation={validation}
-          setValidation={setValidation}
           plan={plan}
           setPlan={setPlan}
           planType={planType}
           setPlanType={setPlanType}
         />
-        <StepThree_addOn currentActiveStep={currentActiveStep} />
-        <StepFour_summary currentActiveStep={currentActiveStep} />
+        <StepThree_addOn
+          currentActiveStep={currentActiveStep}
+          setCurrentActiveStep={setCurrentActiveStep}
+          validation={validation}
+        />
+        <StepFour_summary
+          currentActiveStep={currentActiveStep}
+          plan={plan}
+          planType={planType}
+        />
         <Confirmation currentActiveStep={currentActiveStep} />
       </form>
     </div>

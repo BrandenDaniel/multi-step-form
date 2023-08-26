@@ -25,15 +25,18 @@ const StepSubmit = ({
   };
 
   return (
-    <div className="multiStepForm__form-submit">
-      <button
-        className={`multiStepForm__form-submit-back ${
-          currentActiveStep == 1 ? "multiStepForm__form-submit-hide" : ""
-        }`}
-        onClick={goBack}
-      >
-        Go Back
-      </button>
+    <div
+      className={`multiStepForm__form-submit ${
+        currentActiveStep == 1 ? "multiStepForm__form-submit--hide-back" : ""
+      }`}
+    >
+      {currentActiveStep != 1 ? (
+        <button className="multiStepForm__form-submit-back" onClick={goBack}>
+          Go Back
+        </button>
+      ) : (
+        ""
+      )}
       <button
         className="multiStepForm__form-submit-next"
         type="submit"

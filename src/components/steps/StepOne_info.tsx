@@ -90,41 +90,41 @@ const StepOne_info = ({
     );
   };
 
-  return currentActiveStep == 1 ? (
-    <>
-      <div className="multiStepForm__form-info multiStepForm__form-container">
-        <h1>Personal info</h1>
-        <div className="multiStepForm__form-info-input">
-          {inputs.map((input) => (
-            <div key={input.id}>
-              <label htmlFor={input.id}>
-                {input.label}
-                <span className="multiStepForm__form-info-input-validation-msg">
-                  {input?.errorMessage
-                    ? input.errorMessage
-                    : "This field is required"}
-                </span>
-              </label>
-              <input
-                {...input}
-                value={input.value}
-                onChange={handleChange}
-                onBlur={handleFocus}
-                data-focused={input.focused}
-              />
-            </div>
-          ))}
+  return (
+    currentActiveStep == 1 && (
+      <>
+        <div className="multiStepForm__form-info multiStepForm__form-container">
+          <h1>Personal info</h1>
+          <div className="multiStepForm__form-info-input">
+            {inputs.map((input) => (
+              <div key={input.id}>
+                <label htmlFor={input.id}>
+                  {input.label}
+                  <span className="multiStepForm__form-info-input-validation-msg">
+                    {input?.errorMessage
+                      ? input.errorMessage
+                      : "This field is required"}
+                  </span>
+                </label>
+                <input
+                  {...input}
+                  value={input.value}
+                  onChange={handleChange}
+                  onBlur={handleFocus}
+                  data-focused={input.focused}
+                />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-      <StepSubmit
-        currentActiveStep={currentActiveStep}
-        setCurrentActiveStep={setCurrentActiveStep}
-        validation={validation.stepOne}
-        stepValidation={stepOneValidation}
-      />
-    </>
-  ) : (
-    ""
+        <StepSubmit
+          currentActiveStep={currentActiveStep}
+          setCurrentActiveStep={setCurrentActiveStep}
+          validation={validation.stepOne}
+          stepValidation={stepOneValidation}
+        />
+      </>
+    )
   );
 };
 
