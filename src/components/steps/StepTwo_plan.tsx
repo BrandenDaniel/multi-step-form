@@ -1,4 +1,4 @@
-import React, { MouseEvent, ChangeEvent } from "react";
+import React, { MouseEvent, ChangeEvent, useState } from "react";
 import Image from "next/image";
 import ArcadeIcon from "../../assets/icon-arcade.svg";
 import AdvancedIcon from "../../assets/icon-advanced.svg";
@@ -13,6 +13,8 @@ type Props = {
   setPlan: any;
   planType: string;
   setPlanType: any;
+  multiplier: number;
+  setMultiplier: any;
 };
 
 const StepTwo_plan = (props: Props) => {
@@ -20,24 +22,24 @@ const StepTwo_plan = (props: Props) => {
     {
       image: ArcadeIcon,
       title: "Arcade",
-      price: `${props.planType == "month" ? 9 : 9 * 10}/${
-        props.planType == "month" ? "mo" : "yr"
+      price: `${9 * props.multiplier}/${
+        props.planType == "Monthly" ? "mo" : "yr"
       }`,
       bonus: "2 months free",
     },
     {
       image: AdvancedIcon,
       title: "Advanced",
-      price: `${props.planType == "month" ? 12 : 12 * 10}/${
-        props.planType == "month" ? "mo" : "yr"
+      price: `${12 * props.multiplier}/${
+        props.planType == "Monthly" ? "mo" : "yr"
       }`,
       bonus: "2 months free",
     },
     {
       image: ProIcon,
       title: "Pro",
-      price: `${props.planType == "month" ? 15 : 15 * 10}/${
-        props.planType == "month" ? "mo" : "yr"
+      price: `${15 * props.multiplier}/${
+        props.planType == "Monthly" ? "mo" : "yr"
       }`,
       bonus: "2 months free",
     },
@@ -48,14 +50,13 @@ const StepTwo_plan = (props: Props) => {
     title: string
   ) => {
     e.preventDefault();
-
     props.setPlan(title);
   };
 
   const handlePlanTypeChange = (event: ChangeEvent<HTMLInputElement>) => {
     event.target.checked
-      ? props.setPlanType("year")
-      : props.setPlanType("month");
+      ? (props.setPlanType("Yearly"), props.setMultiplier(10))
+      : (props.setPlanType("Monthly"), props.setMultiplier(1));
   };
 
   return (
@@ -81,7 +82,7 @@ const StepTwo_plan = (props: Props) => {
                   <h2>{item.title}</h2>
                   <p>{item.price}</p>
                   <span
-                    className={props.planType == "year" ? "show-bonus" : ""}
+                    className={props.planType == "Yearly" ? "show-bonus" : ""}
                   >
                     {item.bonus}
                   </span>
@@ -93,17 +94,21 @@ const StepTwo_plan = (props: Props) => {
           <div className="multiStepForm__form-plan-billing">
             <span
               className={
-                props.planType == "month"
+                props.planType == "Monthly"
                   ? "multiStepForm__form-plan-billing-active"
                   : ""
               }
             >
               Monthly
             </span>
-            <input type="checkbox" onChange={handlePlanTypeChange} />
+            <input
+              type="checkbox"
+              onChange={handlePlanTypeChange}
+              checked={props.planType == "Yearly" ? true : false}
+            />
             <span
               className={
-                props.planType == "year"
+                props.planType == "Yearly"
                   ? "multiStepForm__form-plan-billing-active"
                   : ""
               }

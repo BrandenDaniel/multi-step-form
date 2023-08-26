@@ -18,7 +18,10 @@ const Page = () => {
   });
 
   const [plan, setPlan] = useState("Arcade");
-  const [planType, setPlanType] = useState("month");
+  const [planType, setPlanType] = useState("Monthly");
+  const [multiplier, setMultiplier] = useState(1);
+  const [mainPrice, setMainPrice] = useState(0);
+  const [secondaryPrice, setSecondaryPrice] = useState(0);
 
   return (
     <div className="multiStepForm">
@@ -38,16 +41,26 @@ const Page = () => {
           setPlan={setPlan}
           planType={planType}
           setPlanType={setPlanType}
+          multiplier={multiplier}
+          setMultiplier={setMultiplier}
         />
         <StepThree_addOn
           currentActiveStep={currentActiveStep}
           setCurrentActiveStep={setCurrentActiveStep}
           validation={validation}
+          planType={planType}
+          multiplier={multiplier}
+          plan={plan}
+          setMainPrice={setMainPrice}
+          secondaryPrice={secondaryPrice}
+          setSecondaryPrice={setSecondaryPrice}
         />
         <StepFour_summary
           currentActiveStep={currentActiveStep}
+          setCurrentActiveStep={setCurrentActiveStep}
           plan={plan}
           planType={planType}
+          mainPrice={mainPrice}
         />
         <Confirmation currentActiveStep={currentActiveStep} />
       </form>

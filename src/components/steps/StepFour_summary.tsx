@@ -1,20 +1,20 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { MouseEvent, useState } from "react";
 
 type Props = {
   currentActiveStep: number;
   setCurrentActiveStep?: any;
   plan: string;
   planType: string;
+  mainPrice: number;
 };
 
 const StepFour_summary = (props: Props) => {
-  const [planPrice, setPlanPrice] = useState(0);
-
-  if (props.plan === "Arcade") {
-    props.planType === "month" ? setPlanPrice(9) : setPlanPrice(90);
-  }
+  const handlePlanChange = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    props.setCurrentActiveStep(2);
+  };
 
   return (
     props.currentActiveStep == 4 && (
@@ -26,13 +26,13 @@ const StepFour_summary = (props: Props) => {
           <div className="multiStepForm__form-summary-detail-item multiStepForm__form-summary-detail-item--header">
             <div>
               <span>
-                {props.plan} ({props.planType == "month" ? "Monthly" : "Yearly"}
-                )
+                {props.plan} (
+                {props.planType == "Monthly" ? "Monthly" : "Yearly"})
               </span>
-              <button>Change</button>
+              <button onClick={handlePlanChange}>Change</button>
             </div>
             <p>
-              ${planPrice}/{props.planType == "month" ? "mo" : "yr"}
+              ${props.mainPrice}/{props.planType == "Monthly" ? "mo" : "yr"}
             </p>
           </div>
 

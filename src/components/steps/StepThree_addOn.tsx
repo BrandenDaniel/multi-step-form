@@ -5,6 +5,12 @@ type Props = {
   currentActiveStep: number;
   setCurrentActiveStep: any;
   validation: any;
+  planType: string;
+  setMainPrice: any;
+  multiplier: number;
+  plan: string;
+  secondaryPrice: number;
+  setSecondaryPrice: any;
 };
 
 const StepThree_addOn = (props: Props) => {
@@ -12,17 +18,17 @@ const StepThree_addOn = (props: Props) => {
     {
       id: "onlineServices",
       subscribed: false,
-      price: "$1/mo",
+      price: 1 * props.multiplier,
     },
     {
       id: "largerStorage",
       subscribed: false,
-      price: "$2/mo",
+      price: 2 * props.multiplier,
     },
     {
       id: "customizableProfile",
       subscribed: false,
-      price: "$2/mo",
+      price: 2 * props.multiplier,
     },
   ]);
 
@@ -30,19 +36,19 @@ const StepThree_addOn = (props: Props) => {
     {
       title: "Online service",
       subtitle: "Access to multiplayer",
-      price: "$1/mo",
+      price: `${1 * props.multiplier}`,
       id: "onlineServices",
     },
     {
       title: "Larger storage",
       subtitle: "Extra 1TB of cloud save",
-      price: "+$2/mo",
+      price: `${2 * props.multiplier}`,
       id: "largerStorage",
     },
     {
       title: "Customizable profile",
       subtitle: "Custom theme on your profile",
-      price: "+$2/mo",
+      price: `${2 * props.multiplier}`,
       id: "customizableProfile",
     },
   ];
@@ -57,9 +63,27 @@ const StepThree_addOn = (props: Props) => {
       return option;
     });
 
-    console.log(updateOptions);
-
     setSelectedOptions(updateOptions);
+  };
+
+  const calculatePrice = () => {
+    props.setMainPrice(
+      props.plan === "Arcade"
+        ? 9 * props.multiplier
+        : props.plan === "Advanced"
+        ? 12 * props.multiplier
+        : props.plan === "Pro"
+        ? 15 * props.multiplier
+        : ""
+    );
+
+    selectedOptions.map((item) => {
+      let price = 0;
+      if (item.subscribed) {
+        price += item.price;
+        return props.setSecondaryPrice(price);
+      }
+    });
   };
 
   return (
@@ -80,7 +104,9 @@ const StepThree_addOn = (props: Props) => {
                   <h2>{item.title}</h2>
                   <p>{item.subtitle}</p>
                 </div>
-                <span>{item.price}</span>
+                <span>
+                  +${item.price}/{props.planType == "Monthly" ? "mo" : "yr"}
+                </span>
               </label>
             ))}
           </div>
@@ -89,6 +115,7 @@ const StepThree_addOn = (props: Props) => {
           currentActiveStep={props.currentActiveStep}
           validation={props.validation.stepThree}
           setCurrentActiveStep={props.setCurrentActiveStep}
+          calculatePrice={calculatePrice}
         />
       </>
     )
