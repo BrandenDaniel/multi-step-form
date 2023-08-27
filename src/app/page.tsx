@@ -43,7 +43,7 @@ const Page = () => {
     },
     {
       name: "phone",
-      type: "number",
+      type: "tel",
       placeholder: "e.g. 04 32 323 232",
       id: "phone",
       label: "Phone Number",
