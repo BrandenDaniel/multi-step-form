@@ -77,7 +77,10 @@ const StepFour_summary = (props: Props) => {
 
             {props.selectedOptions.map((item) =>
               item.subscribed ? (
-                <div className="multiStepForm__form-summary-detail-item multiStepForm__form-summary-detail-item--addon">
+                <div
+                  className="multiStepForm__form-summary-detail-item multiStepForm__form-summary-detail-item--addon"
+                  key={item.id}
+                >
                   <span>{item.title}</span>
                   <p>
                     +${item.price * props.multiplier}/{props.planTypeAlias}
@@ -91,7 +94,10 @@ const StepFour_summary = (props: Props) => {
             </div>
 
             {props.inputs.map((item) => (
-              <div className="multiStepForm__form-summary-detail-item multiStepForm__form-summary-detail-item--user">
+              <div
+                className="multiStepForm__form-summary-detail-item multiStepForm__form-summary-detail-item--user"
+                key={item.id}
+              >
                 <span>{item.label}</span>
                 <p>{item.value}</p>
               </div>
