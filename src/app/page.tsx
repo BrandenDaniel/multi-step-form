@@ -20,6 +20,29 @@ const Page = () => {
   const [plan, setPlan] = useState("Arcade");
   const [planType, setPlanType] = useState("Monthly");
   const [multiplier, setMultiplier] = useState(1);
+  const [selectedOptions, setSelectedOptions] = useState([
+    {
+      title: "Online service",
+      subtitle: "Access to multiplayer",
+      id: "onlineServices",
+      subscribed: false,
+      price: 1 * multiplier,
+    },
+    {
+      title: "Larger storage",
+      subtitle: "Extra 1TB of cloud save",
+      id: "largerStorage",
+      subscribed: false,
+      price: 2 * multiplier,
+    },
+    {
+      title: "Customizable profile",
+      subtitle: "Custom theme on your profile",
+      id: "customizableProfile",
+      subscribed: false,
+      price: 2 * multiplier,
+    },
+  ]);
   const [mainPrice, setMainPrice] = useState(0);
   const [secondaryPrice, setSecondaryPrice] = useState(0);
 
@@ -54,12 +77,15 @@ const Page = () => {
           setMainPrice={setMainPrice}
           secondaryPrice={secondaryPrice}
           setSecondaryPrice={setSecondaryPrice}
+          selectedOptions={selectedOptions}
+          setSelectedOptions={setSelectedOptions}
         />
         <StepFour_summary
           currentActiveStep={currentActiveStep}
           setCurrentActiveStep={setCurrentActiveStep}
           plan={plan}
           planType={planType}
+          selectedOptions={selectedOptions}
           mainPrice={mainPrice}
         />
         <Confirmation currentActiveStep={currentActiveStep} />

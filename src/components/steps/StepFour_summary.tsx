@@ -2,12 +2,21 @@
 
 import React, { MouseEvent, useState } from "react";
 
+type SelectedOption = {
+  title: string;
+  subtitle: string;
+  id: string;
+  subscribed: boolean;
+  price: number;
+};
+
 type Props = {
   currentActiveStep: number;
   setCurrentActiveStep?: any;
   plan: string;
   planType: string;
   mainPrice: number;
+  selectedOptions: SelectedOption[];
 };
 
 const StepFour_summary = (props: Props) => {
@@ -36,19 +45,22 @@ const StepFour_summary = (props: Props) => {
             </p>
           </div>
 
-          <div className="multiStepForm__form-summary-detail-item">
-            <span>Online service</span>
-            <p>+$10/yr</p>
-          </div>
-
-          <div className="multiStepForm__form-summary-detail-item">
-            <span>Larger storage</span>
-            <p>+$20/yr</p>
-          </div>
+          {props.selectedOptions.map((item) =>
+            item.subscribed ? (
+              <div className="multiStepForm__form-summary-detail-item">
+                <span>{item.title}</span>
+                <p>
+                  +${item.price}/{props.planType == "Monthly" ? "mo" : "yr"}
+                </p>
+              </div>
+            ) : null
+          )}
         </div>
 
         <div className="multiStepForm__form-summary-total">
-          <span>Total (per year)</span>
+          <span>
+            Total ({props.planType == "Monthly" ? "per month" : "per year"})
+          </span>
           <p>$120/yr</p>
         </div>
       </div>
