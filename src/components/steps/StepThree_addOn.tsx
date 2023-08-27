@@ -17,6 +17,7 @@ type Props = {
   setMainPrice: any;
   multiplier: number;
   plan: string;
+  planTypeAlias: string;
   secondaryPrice: number;
   setSecondaryPrice: any;
   selectedOptions: SelectedOption[];
@@ -57,7 +58,7 @@ const StepThree_addOn = (props: Props) => {
       }
     });
 
-    props.setSecondaryPrice(secondaryPrice);
+    props.setSecondaryPrice(secondaryPrice * props.multiplier);
   };
 
   return (
@@ -80,7 +81,7 @@ const StepThree_addOn = (props: Props) => {
                   <p>{item.subtitle}</p>
                 </div>
                 <span>
-                  +${item.price}/{props.planType == "Monthly" ? "mo" : "yr"}
+                  +${item.price * props.multiplier}/{props.planTypeAlias}
                 </span>
               </label>
             ))}

@@ -117,7 +117,7 @@
         margin: 24px 0;
         display: flex;
         flex-direction: column;
-        gap: 12px 14px;
+        gap: 12px;
 
         &-active,
         button:hover {
@@ -248,7 +248,7 @@
           border-radius: 8px;
           gap: 16px;
 
-          &:has(> input:checked, > input:focus) {
+          &:has(> input:checked) {
             border-color: var(--purple) !important;
             background: var(--very-light-grey);
           }
@@ -320,10 +320,42 @@
         flex-direction: column;
         gap: 15px;
 
+        /* width */
+        &::-webkit-scrollbar {
+          width: 8px;
+        }
+
+        /* Track */
+        &::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+          background: var(--light-grey);
+          border: 2px solid var(--very-light-grey);
+          border-radius: 10px;
+        }
+
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+          background: #555;
+        }
+
+        &:has(.multiStepForm__form-summary-detail-item--addon) {
+          .multiStepForm__form-summary-detail-item--addon-change {
+            display: block !important;
+          }
+        }
+
         &-item {
           display: flex;
           justify-content: space-between;
-          align-items: center;
+          align-items: flex-start;
+
+          &--addon-change {
+            display: none;
+          }
 
           &--header {
             > p {
@@ -342,21 +374,21 @@
                 font-size: 14px;
                 font-weight: 500;
               }
-
-              button {
-                padding: 0;
-                background: none;
-                border: none;
-                text-decoration: underline;
-                color: var(--grey);
-                font-size: 14px;
-              }
             }
+          }
+
+          button {
+            padding: 0;
+            background: none;
+            border: none;
+            text-decoration: underline;
+            color: var(--grey);
+            font-size: 14px;
           }
 
           &:nth-child(2) {
             padding-top: 15px;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            border-top: 1px solid rgba(0, 0, 0, 0.075);
           }
 
           > span {
@@ -368,6 +400,23 @@
             font-weight: 400;
             font-size: 14px;
             color: var(--denim);
+          }
+
+          &--user {
+            align-items: flex-start;
+            gap: 30px;
+
+            span {
+              white-space: nowrap;
+            }
+            p {
+              word-break: break-all;
+              text-align: right;
+            }
+            &:nth-last-child(4) {
+              padding-top: 15px;
+              border-top: 1px solid rgba(0, 0, 0, 0.075);
+            }
           }
         }
       }
@@ -427,7 +476,8 @@
         padding: 0;
       }
 
-      &-next {
+      &-next,
+      &-confirm {
         color: #fff;
         background: var(--denim);
         border: none;
@@ -466,6 +516,7 @@
       margin: 8px 0 0 0;
       flex-grow: 1;
       height: initial;
+      gap: 0;
 
       &-container {
         > h1 {
@@ -533,6 +584,8 @@
           margin: 35px 0 25px 0;
           padding: 20px 24px;
           gap: 16px;
+          max-height: 237px;
+          overflow: auto;
 
           &-item {
             &--header {
@@ -544,13 +597,11 @@
               p {
                 font-size: 16px !important;
               }
-
-              button:hover {
-                color: var(--purple);
-                cursor: pointer;
-              }
             }
-
+            button:hover {
+              color: var(--purple);
+              cursor: pointer;
+            }
             &:nth-child(2) {
               padding-top: 16px;
             }
@@ -578,17 +629,23 @@
       &-submit {
         padding: 16px 0 !important;
         max-width: 375px;
-        &-next {
+
+        button {
+          font-size: 16px !important;
+          transition: 0.15s ease-in-out;
+        }
+
+        &-next,
+        &-confirm {
           padding: 15px 25px;
           border-radius: 8px;
-          font-size: 16px !important;
 
           &:hover {
             background: #164a8a;
           }
         }
 
-        &-final {
+        &-confirm {
           background: var(--purple);
 
           &:hover {
@@ -607,12 +664,6 @@
         max-width: 450px !important;
       }
 
-      &-plan {
-        &-options {
-          gap: 12px 16px;
-        }
-      }
-
       &-addOn {
         &-options {
           > label {
@@ -622,6 +673,18 @@
               cursor: pointer;
             }
           }
+        }
+      }
+
+      &-summary {
+        &-detail {
+          max-height: 262px;
+        }
+      }
+
+      &-submit {
+        &-back:hover {
+          color: var(--denim);
         }
       }
     }

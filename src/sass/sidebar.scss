@@ -1,40 +1,50 @@
-.multiStepForm__sidebar {
-  height: 180px;
-  background-image: url("../assets/bg-sidebar-mobile.svg");
-  background-size: cover;
-  background-position: center;
+.multiStepForm {
+  &:has(.multiStepForm__form-confirmation) {
+    .multiStepForm__sidebar-steps-item:last-of-type > span {
+      border-color: var(--sky-blue) !important;
+      color: var(--denim) !important;
+      background: var(--sky-blue);
+    }
+  }
 
-  &-steps {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 32px 16px;
-    height: 57%;
+  &__sidebar {
+    height: 180px;
+    background-image: url("../assets/bg-sidebar-mobile.svg");
+    background-size: cover;
+    background-position: center;
 
-    &-item {
+    &-steps {
       display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 32px 16px;
+      height: 57%;
 
-      &--active {
-        > span {
-          border-color: var(--sky-blue) !important;
-          color: var(--denim) !important;
-          background: var(--sky-blue);
-        }
-      }
-      > span {
-        height: 33px;
-        width: 33px;
-        font-size: 14px;
+      &-item {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        font-weight: 700;
-        border: 1px solid #fff;
-        color: #fff;
-      }
-      div {
-        display: none;
+
+        &--active {
+          > span {
+            border-color: var(--sky-blue) !important;
+            color: var(--denim) !important;
+            background: var(--sky-blue);
+          }
+        }
+        > span {
+          height: 33px;
+          width: 33px;
+          font-size: 14px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          font-weight: 700;
+          border: 1px solid #fff;
+          color: #fff;
+        }
+        div {
+          display: none;
+        }
       }
     }
   }

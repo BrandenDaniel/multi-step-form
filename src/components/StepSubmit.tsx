@@ -37,11 +37,13 @@ const StepSubmit = (props: Props) => {
         ""
       )}
       <button
-        className="multiStepForm__form-submit-next"
+        className={`multiStepForm__form-submit-${
+          props.currentActiveStep == 4 ? "confirm" : "next"
+        }`}
         type="submit"
         onClick={goNext}
       >
-        Next Step
+        {props.currentActiveStep == 4 ? "Confirm" : "Next Step"}
       </button>
     </div>
   );

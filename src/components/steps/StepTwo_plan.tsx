@@ -13,6 +13,8 @@ type Props = {
   setPlan: any;
   planType: string;
   setPlanType: any;
+  planTypeAlias: string;
+  setPlanTypeAlias: any;
   multiplier: number;
   setMultiplier: any;
 };
@@ -22,25 +24,19 @@ const StepTwo_plan = (props: Props) => {
     {
       image: ArcadeIcon,
       title: "Arcade",
-      price: `${9 * props.multiplier}/${
-        props.planType == "Monthly" ? "mo" : "yr"
-      }`,
+      price: `$${9 * props.multiplier}/${props.planTypeAlias}`,
       bonus: "2 months free",
     },
     {
       image: AdvancedIcon,
       title: "Advanced",
-      price: `${12 * props.multiplier}/${
-        props.planType == "Monthly" ? "mo" : "yr"
-      }`,
+      price: `$${12 * props.multiplier}/${props.planTypeAlias}`,
       bonus: "2 months free",
     },
     {
       image: ProIcon,
       title: "Pro",
-      price: `${15 * props.multiplier}/${
-        props.planType == "Monthly" ? "mo" : "yr"
-      }`,
+      price: `$${15 * props.multiplier}/${props.planTypeAlias}`,
       bonus: "2 months free",
     },
   ];
@@ -55,8 +51,12 @@ const StepTwo_plan = (props: Props) => {
 
   const handlePlanTypeChange = (event: ChangeEvent<HTMLInputElement>) => {
     event.target.checked
-      ? (props.setPlanType("Yearly"), props.setMultiplier(10))
-      : (props.setPlanType("Monthly"), props.setMultiplier(1));
+      ? (props.setPlanType("Yearly"),
+        props.setMultiplier(10),
+        props.setPlanTypeAlias("yr"))
+      : (props.setPlanType("Monthly"),
+        props.setMultiplier(1),
+        props.setPlanTypeAlias("mo"));
   };
 
   return (
